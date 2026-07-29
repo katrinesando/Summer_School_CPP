@@ -27,14 +27,14 @@ int main(){
     {
         auto v = make_ints(VECTOR_SIZE, 8, 1000);
         v[VECTOR_SIZE/2] = 7;
-        auto it = timer::run_timer("find 7 in vector<int>, hit at middle", 3, VECTOR_SIZE, VECTOR_SIZE/2,
+        auto it = run_timer("find 7 in vector<int>, hit at middle", 3, VECTOR_SIZE,
             [&]{ return std::find(v.begin(), v.end(), 7); });
         std::cout << "  index " << (it - v.begin()) << std::endl;
     }
     //no 7 (find())
     {
         auto v = make_ints(VECTOR_SIZE, 8, 1000);
-        auto it = timer::run_timer("find 7 in vector<int>, miss", 3, VECTOR_SIZE, VECTOR_SIZE,
+        auto it = run_timer("find 7 in vector<int>, miss", 3, (VECTOR_SIZE/2),
             [&]{ return std::find(v.begin(), v.end(), 7); });
         std::cout << "  index " << (it - v.begin()) << std::endl;
     }
@@ -44,8 +44,7 @@ int main(){
     {
         auto v = make_ints(VECTOR_SIZE, 8, 1000);
         v[VECTOR_SIZE/2] = 3;
-        auto it = timer::run_timer("find_if x<7 in vector<int>, hit at middle",
-                            3, VECTOR_SIZE, VECTOR_SIZE/2,
+        auto it = run_timer("find_if x<7 in vector<int>, hit at middle", 3, VECTOR_SIZE,
             [&]{ return std::find_if(v.begin(), v.end(),
                                     [](int x){ return x < 7; }); });
         std::cout << "  index " << (it - v.begin()) << "\n";
@@ -54,8 +53,7 @@ int main(){
     {
         auto v = make_ints(VECTOR_SIZE, 7, 1000);
         v[VECTOR_SIZE/2] = 8;
-        auto it = timer::run_timer("find_if x<7 in vector<int>, miss",
-                            3, VECTOR_SIZE, VECTOR_SIZE,
+        auto it = run_timer("find_if x<7 in vector<int>, miss", 3, (VECTOR_SIZE/2),
             [&]{ return std::find_if(v.begin(), v.end(),
                                     [](int x){ return x < 7; }); });
         std::cout << "  index " << (it - v.begin()) << "\n";
@@ -68,8 +66,7 @@ int main(){
             words.push_back(make_word());
         }
         std::string target(20,'X');
-        auto it = timer::run_timer("find string in vector<string>, miss",
-                            3, words.size(), words.size(),
+        auto it = run_timer("find string in vector<string>, miss", 3, (words.size()/2),
             [&]{ return std::find(words.begin(), words.end(), target);});
         std::cout << " index " << (it-words.begin()) << std::endl;
     }
@@ -82,8 +79,7 @@ int main(){
         }
         std::string target(20,'X');
         words[words.size()/2] = target;
-        auto it = timer::run_timer("find string in vector<string>, hit in middle",
-                            3, words.size(), words.size()/2,
+        auto it = run_timer("find string in vector<string>, hit in middle", 3, words.size(),
             [&]{ return std::find(words.begin(), words.end(), target);});
         std::cout << " index " << (it-words.begin()) << std::endl;
     }
