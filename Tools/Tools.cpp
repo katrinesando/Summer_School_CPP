@@ -1,7 +1,7 @@
 export module timer;
 import std;
 
-template<class F>
+export template<class F>
 auto timer(F f){
     auto start = std::chrono::steady_clock::now();
     auto res = f();

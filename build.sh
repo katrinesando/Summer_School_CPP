@@ -19,6 +19,7 @@ if [ ! -f gcm.cache/std.gcm ]; then
 fi
 
 g++ $FLAGS -c Tools/Tools.cpp -o tools.o
-g++ $FLAGS Exercise_2/Measurement.cpp tools.o -o measurement
+# g++ $FLAGS Exercise_2/Measurement.cpp tools.o -o measurement
+g++ $FLAGS Exercise_3/ListsVsVectors.cpp tools.o -o list_vs_vector
 
-echo "done: ./measurement"
+echo "done: ./list_vs_vector"
