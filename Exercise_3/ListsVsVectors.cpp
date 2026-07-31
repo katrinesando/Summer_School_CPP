@@ -19,6 +19,13 @@ std::vector<std::size_t> make_positions(std::size_t n, unsigned seed){
     return pos;
 }
 
+struct Large {
+    int key;
+    char pad[60];
+    Large(int k = 0) : key(k) {}
+    bool operator < (const Large& o) const {return key < o.key;}
+};
+
 template<class Container>
 std::pair<double, double> experiment(const std::vector<int>& values, const std::vector<std::size_t>& positions){
     Container c;
@@ -96,6 +103,14 @@ int main(){
             auto [s_insert, s_remove] = experiment<std::set<int>>(values, positions);
             std::println("set, insert, {}, {}, {:.1f}", n, seed, s_insert);
             std::println("set, remove, {}, {}, {:.1f}", n, seed, s_remove);
+
+            auto [lv_insert, lv_remove] = experiment<std::vector<Large>>(values, positions);
+            std::println("vector_large, insert, {}, {}, {:.1f}", n , seed, lv_insert);
+            std::println("vector_large, remove, {}, {}, {:.1f}", n , seed, lv_remove);
+            
+            auto [ll_insert, ll_remove] = experiment<std::list<Large>>(values, positions);
+            std::println("list_large, insert, {}, {}, {:.1f}", n , seed, ll_insert);
+            std::println("list_large, remove, {}, {}, {:.1f}", n , seed, ll_remove);
         }
         std::println("done n = {}", n);
     }
