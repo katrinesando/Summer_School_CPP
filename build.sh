@@ -18,8 +18,8 @@ if [ ! -f gcm.cache/std.gcm ]; then
     g++ $FLAGS -fsearch-include-path bits/std.cc -c -o /dev/null
 fi
 
-g++ $FLAGS -c Tools/Tools.cpp -o tools.o
-# g++ $FLAGS Exercise_2/Measurement.cpp tools.o -o measurement
-g++ $FLAGS Exercise_3/ListsVsVectors.cpp tools.o -o list_vs_vector
-
-echo "done: ./list_vs_vector"
+# g++ $FLAGS -c Tools/Tools.cpp -o tools.o
+g++ $FLAGS -c Exercise_4/Matrix.cpp -o matrix.o 
+# g++ $FLAGS Exercise_3/ListsVsVectors.cpp tools.o -o list_vs_vector
+g++ $FLAGS Exercise_4/GenericMatrix.cpp matrix.o -o generic_matrix
+echo "done: ./generic_matrix"
